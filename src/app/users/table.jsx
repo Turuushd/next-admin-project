@@ -2,7 +2,14 @@
 
 import * as React from "react";
 
-import { Table, TableCell, TableHead, TableHeader, TableRow, TableBody } from "@/components/ui/table";
+import {
+  Table,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableBody,
+} from "@/components/ui/table";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -17,7 +24,7 @@ import { Input } from "@/components/ui/input";
 import { MoreHorizontal, Settings } from "lucide-react";
 
 export function UsersTable(props) {
-  const { data } = props;
+  const { data, limit } = props;
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
@@ -38,7 +45,7 @@ export function UsersTable(props) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.slice(0, 10).map((item, index) => (
+            {data?.slice(0, limit).map((item, index) => (
               <TableRow key={item.id}>
                 <TableCell>{index + 1}</TableCell>
                 <TableHead>
@@ -47,9 +54,9 @@ export function UsersTable(props) {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </TableHead>
-                <TableHead>Нармандах</TableHead>
-                <TableHead>Тэмүүлэн</TableHead>
-                <TableHead>boldoo@gmail.com</TableHead>
+                <TableHead>{item.firstname}</TableHead>
+                <TableHead>{item.lastname}</TableHead>
+                <TableHead>{item.email}</TableHead>
                 <TableHead className="w-1">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -60,7 +67,13 @@ export function UsersTable(props) {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem onClick={() => navigator.clipboard.writeText("temkanibno@gmail.com")}>Copy Email</DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() =>
+                          navigator.clipboard.writeText("temkanibno@gmail.com")
+                        }
+                      >
+                        Copy Email
+                      </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>Edit</DropdownMenuItem>
                       <DropdownMenuItem>Delete</DropdownMenuItem>

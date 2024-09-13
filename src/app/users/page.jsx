@@ -11,6 +11,7 @@ const Users = () => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
 
   const [data, setData] = useState([]);
+  const [limit, setLimit] = useState(10);
 
   useEffect(() => {
     fetch("/api/users")
@@ -19,6 +20,12 @@ const Users = () => {
         setData(data);
       });
   }, []);
+
+  const handleClick = () => {
+    if (limit !== data.length){
+      setLimit(limit + 10);
+    }
+  };
 
   return (
     <div>
@@ -32,9 +39,9 @@ const Users = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <UsersTable data={data} />
+          <UsersTable data={data} limit={limit} />
           <div className="flex justify-center p-8">
-            <Button variant="outline">Load more...</Button>
+            <Button variant="outline" onClick={handleClick}>Load more...</Button>
           </div>
         </CardContent>
       </Card>
