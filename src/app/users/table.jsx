@@ -85,7 +85,7 @@ export function UsersTable(props) {
                         <DropdownMenuItem
                           onClick={() =>
                             navigator.clipboard.writeText(
-                              "temkanibno@gmail.com"
+                              item.email
                             )
                           }
                         >
