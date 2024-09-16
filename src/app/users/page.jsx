@@ -12,6 +12,7 @@ const Users = () => {
 
   const [data, setData] = useState([]);
   const [limit, setLimit] = useState(10);
+  const [more, setMore] = useState(true);
 
   useEffect(() => {
     fetch("/api/users")
@@ -22,8 +23,10 @@ const Users = () => {
   }, []);
 
   const handleClick = () => {
-    if (limit !== data.length){
+    if (data.length !== limit) {
       setLimit(limit + 10);
+    }else{
+      setMore(false)
     }
   };
 
@@ -41,7 +44,9 @@ const Users = () => {
         <CardContent>
           <UsersTable data={data} limit={limit} />
           <div className="flex justify-center p-8">
-            <Button variant="outline" onClick={handleClick}>Load more...</Button>
+            <Button variant="outline" onClick={handleClick}>
+              Load more...
+            </Button>
           </div>
         </CardContent>
       </Card>
