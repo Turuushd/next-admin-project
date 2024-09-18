@@ -24,8 +24,14 @@ import { Input } from "@/components/ui/input";
 import { MoreHorizontal, Settings } from "lucide-react";
 
 export function UsersTable(props) {
-  const { data, limit } = props;
+  const { data, setData, limit } = props;
   const [value, setValue] = React.useState("");
+
+  const handleDelete = (id) => {
+    const newData = [...data].filter((item) => item.id !== id);
+    setData(newData);
+  };
+
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
@@ -84,18 +90,27 @@ export function UsersTable(props) {
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem
                           onClick={() =>
-                            navigator.clipboard.writeText(
-                              item.email
-                            )
+                            navigator.clipboard.writeText(item.email)
                           }
                         >
                           Copy Email
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => {
-                          
-                        }}>Delete</DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => {
+                            fetch(`/api/users/${item.id}`, {
+                              method: "DELETE",
+                            })
+                              .then((res) => res.json())
+                              .then((data) => {
+                                console.log(data);
+                              });
+                            handleDelete(item.id);
+                          }}
+                        >
+                          Delete
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableHead>

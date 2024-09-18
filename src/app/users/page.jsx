@@ -39,7 +39,7 @@ const Users = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <UsersTable data={data} limit={limit} />
+          <UsersTable data={data} limit={limit} setData={setData} />
           {limit < data.length && (
             <div className="flex justify-center p-8">
               <Button variant="outline" onClick={handleClick}>
