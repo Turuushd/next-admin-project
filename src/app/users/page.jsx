@@ -13,6 +13,10 @@ const Users = () => {
   const [data, setData] = useState([]);
   const [limit, setLimit] = useState(10);
 
+  const onCreateUser = (newUser) => {
+    setData([...data, newUser]);
+  };
+
   useEffect(() => {
     fetch("/api/users")
       .then((res) => res.json())
@@ -50,7 +54,11 @@ const Users = () => {
         </CardContent>
       </Card>
 
-      <UserCreateDialog open={createModalOpen} onClose={setCreateModalOpen} />
+      <UserCreateDialog
+        open={createModalOpen}
+        onClose={setCreateModalOpen}
+        onCreateUser={onCreateUser}
+      />
     </div>
   );
 };

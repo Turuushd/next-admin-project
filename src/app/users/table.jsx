@@ -27,6 +27,7 @@ export function UsersTable(props) {
   const { data, setData, limit } = props;
   const [value, setValue] = React.useState("");
 
+
   const handleDelete = (id) => {
     const newData = [...data].filter((item) => item.id !== id);
     setData(newData);
