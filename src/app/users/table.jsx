@@ -24,14 +24,8 @@ import { Input } from "@/components/ui/input";
 import { MoreHorizontal, Settings } from "lucide-react";
 
 export function UsersTable(props) {
-  const { data, setData, limit } = props;
+  const { data, limit, handleDelete, onClose, onEdit } = props;
   const [value, setValue] = React.useState("");
-
-
-  const handleDelete = (id) => {
-    const newData = [...data].filter((item) => item.id !== id);
-    setData(newData);
-  };
 
   return (
     <div className="w-full">
@@ -97,16 +91,16 @@ export function UsersTable(props) {
                           Copy Email
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Edit</DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() => {
-                            fetch(`/api/users/${item.id}`, {
-                              method: "DELETE",
-                            })
-                              .then((res) => res.json())
-                              .then((data) => {
-                                console.log(data);
-                              });
+                            onClose(true);
+                            onEdit(item.id)
+                          }}
+                        >
+                          Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => {
                             handleDelete(item.id);
                           }}
                         >

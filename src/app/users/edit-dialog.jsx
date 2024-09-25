@@ -11,18 +11,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 
-export const UserCreateDialog = (props) => {
-  const { open, onClose, onCreateUser } = props;
+export const EditDialog = (props) => {
+  const { open, onClose, onEdit } = props;
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Create user</DialogTitle>
+          <DialogTitle>Edit</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
@@ -68,9 +67,7 @@ export const UserCreateDialog = (props) => {
           </Button>
           <Button
             type="submit"
-            onClick={() =>
-              onCreateUser({ firstname, lastname, email, imageUrl })
-            }
+            onClick={() => onEdit({ firstname, lastname, email, imageUrl })}
           >
             Save
           </Button>
